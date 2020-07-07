@@ -1,28 +1,61 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div
+      class="grid"
+      :style="{
+      'grid-template-rows': `repeat(${rows}, ${elDim}px)`,
+      'grid-template-columns': `repeat(${cols}, ${elDim}px)`
+      }"
+    >
+      <div
+        v-for="i in rows * cols"
+        :key="i"
+        class="cell"
+        :style="{width: `${elDim}px`, height: `${elDim}px`}"
+      ></div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data() {
+    return {
+      width: 800,
+      height: 600,
+      elDim: 60
+    };
+  },
+  computed: {
+    rows() {
+      return Math.floor(this.height / this.elDim);
+    },
+    cols() {
+      return Math.floor(this.width / this.elDim);
+    }
   }
-}
+};
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  height: 100vh;
+}
+.grid {
+  background-color: white;
+  display: grid;
+}
+.cell {
+  border: 1px solid black;
 }
 </style>
