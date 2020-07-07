@@ -7,24 +7,21 @@
       'grid-template-columns': `repeat(${cols}, ${elDim}px)`
       }"
     >
-      <div
-        v-for="i in rows * cols"
-        :key="i"
-        class="cell"
-        :style="{width: `${elDim}px`, height: `${elDim}px`}"
-      ></div>
+      <Cell v-for="i in rows * cols" :key="i" :dim="elDim"></Cell>
     </div>
   </div>
 </template>
 
 <script>
+import Cell from "./components/Cell.vue";
 export default {
   name: "App",
+  components: { Cell },
   data() {
     return {
-      width: 800,
+      width: 1200,
       height: 600,
-      elDim: 60
+      elDim: 30
     };
   },
   computed: {
@@ -52,10 +49,8 @@ export default {
   height: 100vh;
 }
 .grid {
-  background-color: white;
   display: grid;
-}
-.cell {
-  border: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
 }
 </style>
